@@ -115,8 +115,7 @@ def caseOf3(lst) :
             print("Invalid input Please write 'UP' or 'Low'.\n")
             bool = False
             # caseOf3(lst)
-
-    
+print("totototototo")
 
 def reGame() :
     x = input("Do you want to play the game again?(Enter O or X) :")
