@@ -1,4 +1,5 @@
 import os
+import random
 
 def intro() :
     print("----------------------------------------------------------------------------\n ")
@@ -121,7 +122,7 @@ def reGame() :
     x = input("Do you want to play the game again?(Enter O or X) :")
 
     if x.upper() == "O":
-        max = 50
+        max = 100
         min = 1
         lst=list(range(min,max+1))
         bool = False
