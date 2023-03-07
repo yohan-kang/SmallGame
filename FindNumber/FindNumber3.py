@@ -1,53 +1,6 @@
 import os
 import random
 
-# def intro():
-#   os.system("cls")
-#   print("this is intro")
-
-
-# def game():
-#   is_running = True
-#   while is_running:
-#     os.system("cls")
-#     print("hello")
-#     val = input("write smth : ").upper()
-#     print(val)
-#     if val == "Q":
-#       is_running = False
-#     elif val == "E":
-#       is_running = False
-#       exit()
-#     print(f"You wrote {val}")
-#     time.sleep(1)
-    
-
-# def restart():
-#   os.system("cls")
-#   val = None
-#   while val != "Y" and val != "N" and val != "E":
-#     os.system("cls")
-#     val = input("Do you want to restart ? [Y]es, [N]o : ").upper()
-  
-#   if val == "Y":
-#     return True
-#   elif val == "E":
-#       exit()
-#   return False
-
-# def main():
-#   again = True
-#   while again:
-#     intro()
-#     game()
-#     again = restart()
-
-# main()
-
-
-
-
-
 def intro():
   os.system("cls")
   print("----------------------------------------------------------------------------\n ")
@@ -88,17 +41,17 @@ def question(num_limit):
     while bool:     
         x = random.randint(min_num,max_num)
         str = input("{} Is this your number? : ".format(x))
-
-        if str.upper() == "LOW":
-            max_num = x-1
+        str = str.upper()
+        if str == "LOW":
+            max_num = x - 1
             bool = lst_check(x,min_num,max_num)
-        elif str.upper() == "UP":
-            min_num = x+1 
+        elif str == "UP":
+            min_num = x + 1 
             bool = lst_check(x,min_num,max_num)
-        elif str.upper() == "YES":
+        elif str == "YES":
             print("S~~~~~o Easy")
             bool = False
-        elif str.upper() == "EXIT":
+        elif str == "EXIT":
             bool = False
         else :
             print("Invalid input Please write 'UP' or 'Low'.")
@@ -122,6 +75,7 @@ def restart():
     if val == "Y":
        return bool
     elif val == "N":
+       print("Good Bye.\n")
        exit()
     else:
        print("Invalid input Please write 'O' or 'X'.\n")
