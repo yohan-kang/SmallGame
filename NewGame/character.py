@@ -6,16 +6,18 @@ print("hi")
 
 
 class Hunter():
-    def __init__(self,hp,power,weapon,shield,point):
+    def __init__(self,hp,mp,power,weapon,shield):
         self.hp = hp
+        self.mp = mp
         self.power = power
         self.weapon = weapon
         self.shield = shield
-        self.action_point = point
+        # self.action_point = point
 
 
     def __str__(self):
-	    return "user1 님 HP:{} shield : {} point :{}".format(self.hp, self.shield, self.action_point)
+	    # return "user1 님 HP:{} shield : {} point :{}".format(self.hp, self.shield, self.action_point)
+        return "user1 님 HP:{} weapon:{} power:{} shield : {}".format(self.hp,self.mp,self.weapon,self.power,self.shield)
 
 
 

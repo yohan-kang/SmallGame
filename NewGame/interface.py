@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class UserAction(ABC):
+class Action(ABC):
 
     @abstractmethod
     def attack(self):
@@ -30,4 +30,11 @@ class UserAction(ABC):
 class MonsterAction(ABC):
     @abstractmethod
     def attack(self):
+        pass
+    @abstractmethod
+    def defense(self, new_content: str) -> None:
+        """작성한 메시지를 수정하는 메소드"""
+        pass
+    @abstractmethod
+    def skil(self):
         pass
