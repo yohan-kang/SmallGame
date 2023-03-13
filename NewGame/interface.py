@@ -8,7 +8,7 @@ class Action(ABC):
         pass
 
     @abstractmethod
-    def defense(self, new_content: str) -> None:
+    def defense(self):
         """작성한 메시지를 수정하는 메소드"""
         # 여기에는 활동수 하나를 추가 해주는걸 넣는다 
         # 방어 성공할 경우? 

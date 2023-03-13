@@ -1,7 +1,8 @@
 import interface
 import character
 import os
-
+import random
+from interface import Action
 
 def intro():
   os.system("cls")
@@ -58,6 +59,54 @@ def createCharacter():
   return str 
 
 
+def stage(user):
+  os.system("cls")
+  stage = 1
+  user = user
+  i=0
+  # boss = character.boss1
+  while stage != 3:
+    boss = character.arr[i]
+    bool = fight(stage,user,boss)
+    if bool:
+      stage += 1
+    i += 1
+
+
+def fight(stage,user,enemy):
+    bool = True 
+
+    while 0 < int(enemy.hp):
+      os.system("cls")
+      print("-------------------------------")
+      print('------------STAGE'+str(stage)+'-------------')
+      print("-------------------------------")
+      print(user)
+      print("\n")
+      print(enemy)
+      print("\n")
+      
+      if 0 > user.hp:
+        print("Game Over")
+        exit()
+      elif 0 > enemy.hp:
+        print("Clear : next stage")
+        return bool
+
+      num = input("choice Action(1:Attack 2:Defense 3:Escape):")
+      if num.isdigit():
+        if int(num) == 1:
+          user.attack(enemy)
+        elif int(num) == 2: 
+          user.defense()
+        elif int(num) == 3: 
+          user.run()
+        else:
+          print("Invalid input Please write a natural number 1 or 2 or 3")
+      else :
+        print("Invalid input Please write a natural number 1 or 2 or 3")
+
+
 def main():
   again = True
   # while again:
@@ -65,7 +114,8 @@ def main():
   level = choiceLevel()
   weapon = choiceWeapon()
   name = createCharacter()
-  user = character.Hunter(name,50,15,10,weapon,10) 
-  print(user)
+  user = character.Character(name,50,15,10,weapon,10) 
+  # print(user)
+  stage(user)
 
 main()
