@@ -1,19 +1,50 @@
-import interface
+from interface import Action
 
 print("hi")
 # 여기에 캐릭터 무기를 넣는다 
 
 
 
-class Hunter():
-    def __init__(self):
-        self.hp = 100
-        self.power = 0
-        self.weapon = None
+class Character(Action):
+    def __init__(self,name,hp,mp,power,weapon:None,shield):
+        self.name = name 
+        self.hp = hp
+        self.mp = mp
+        self.power = power
+        self.weapon = weapon
+        self.shield = shield
+        # self.action_point = point
+
+    def attack(self,enemy):
+        # enemy.hp = enemy.hp - (self.weapon + self.power)
+        enemy.hp = enemy.hp - self.power
+
+
+    def defense(self):
+        self.shield = self.shield + 10
+
+    
+    def run(self, destination: str) -> bool:
+        pass
 
 
 
-print(interface.abc)
+    def __str__(self):
+	    # return "user1 님 HP:{} shield : {} point :{}".format(self.hp, self.shield, self.action_point)
+        if self.hp > 1:
+            return "{} 님 HP:{} MP:{}  weapon:{} power:{} shield: {}".format(self.name,self.hp,self.mp,self.weapon,self.power,self.shield)
+        else:
+            return "YOU DIE"
+
+
+
+
+boss1 = Character("King of Skeleton",60,60,20,"sword",30)
+boss2 = Character("minotaur",60,60,"sword",20,30)
+boss3 = Character("Ruined King",60,60,"sword",20,30)
+
+arr = [boss1,boss2,boss3]
+
 
 
 
