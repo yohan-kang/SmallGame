@@ -1,40 +1,43 @@
 from abc import ABC, abstractmethod
 
-
-class Action(ABC):
-
+class BasicAction:
     @abstractmethod
     def attack(self):
         pass
 
     @abstractmethod
     def defense(self):
-        """작성한 메시지를 수정하는 메소드"""
-        # 여기에는 활동수 하나를 추가 해주는걸 넣는다 
-        # 방어 성공할 경우? 
-        # 아니면 보호력?? 증가로 
         pass
-    
-    # @abstractmethod
-    # def cure(self, new_content: str) -> None:
-    #     pass
 
-    # 고유 강기술? 
+class HunterAction(ABC,BasicAction):
 
+    # # 고유 강기술? 
+    @abstractmethod
+    def skil(self):
+        """작성한 메시지를 전송하는 메소드"""
+
+        # if 문을사용하여 각 무기만의 스킬 구현
+        pass
 
     @abstractmethod
-    def run(self, destination: str) -> bool:
+    def run(self):
         """작성한 메시지를 전송하는 메소드"""
         pass
 
-class MonsterAction(ABC):
-    @abstractmethod
-    def attack(self):
-        pass
-    @abstractmethod
-    def defense(self, new_content: str) -> None:
-        """작성한 메시지를 수정하는 메소드"""
-        pass
+
+# 몬스터 액션 클래스가 따로 필요할까??  
+
+# class MonsterAction(ABC,Basic):
+#     @abstractmethod
+#     def attack(self):
+#         pass
+#     @abstractmethod
+#     def defense(self):
+#         """작성한 메시지를 수정하는 메소드"""
+#         pass
+
+
+class BossMonsterAction(ABC,BasicAction):
     @abstractmethod
     def skil(self):
         pass
