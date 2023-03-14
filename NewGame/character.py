@@ -1,12 +1,9 @@
-from interface import Action
-
-print("hi")
-# 여기에 캐릭터 무기를 넣는다 
+from interface import BasicAction,HunterAction,BossMonsterAction
 
 
-
-class Character(Action):
-    def __init__(self,name,hp,mp,power,weapon:None,shield):
+class Character():
+    def __init__(self,grade,name,hp,mp,power,weapon:None,shield):
+        self.grade = grade 
         self.name = name 
         self.hp = hp
         self.mp = mp
@@ -14,20 +11,6 @@ class Character(Action):
         self.weapon = weapon
         self.shield = shield
         # self.action_point = point
-
-    def attack(self,enemy):
-        # enemy.hp = enemy.hp - (self.weapon + self.power)
-        enemy.hp = enemy.hp - self.power
-
-
-    def defense(self):
-        self.shield = self.shield + 10
-
-    
-    def run(self, destination: str) -> bool:
-        pass
-
-
 
     def __str__(self):
 	    # return "user1 님 HP:{} shield : {} point :{}".format(self.hp, self.shield, self.action_point)
@@ -39,11 +22,96 @@ class Character(Action):
 
 
 
-boss1 = Character("King of Skeleton",60,60,20,"sword",30)
-boss2 = Character("minotaur",60,60,"sword",20,30)
-boss3 = Character("Ruined King",60,60,"sword",20,30)
+class Hunter(Character,HunterAction):
 
-arr = [boss1,boss2,boss3]
+    def attack(self,enemy):
+        if  enemy.shield > self.power:
+            enemy.shield = enemy.shield - self.power
+        elif self.power > enemy.shield:
+            damage = self.power - enemy.shield
+            enemy.shield = 0
+            enemy.hp = enemy.hp - damage 
+        elif enemy.shield == 0:
+            enemy.hp = enemy.hp - self.power
+
+    def defense(self):
+        self.shield = self.shield + 10
+
+    def skil():
+        pass 
+
+    def run():
+        pass
+
+class Monster(Character,BasicAction):
+    def attack(self,user):
+        # enemy.hp = enemy.hp - (self.weapon + self.power)
+        user.hp = user.hp - self.power
+
+    def defense(self):
+        self.shield = self.shield + 10
+
+
+class BossMonster1(Character,BossMonsterAction):
+    def attack(self,enemy):
+        if  enemy.shield > self.power:
+            enemy.shield = enemy.shield - self.power
+        elif self.power > enemy.shield:
+            damage = self.power - enemy.shield
+            enemy.shield = 0
+            enemy.hp = enemy.hp - damage 
+        elif enemy.shield == 0:
+            enemy.hp = enemy.hp - self.power
+
+    def defense(self):
+        self.shield = self.shield + 20
+    
+    def skil(self,user):
+        print("Boss Unique Skills  go to hell ~~~ damage 20")
+        damage = 20
+        if user.shield > 0:
+            if damage > user.shield:
+                damage = damage - user.shield
+                user.shield = 0
+                user.hp = user.hp - damage
+        else:
+            user.hp = user.hp - damage
+
+class BossMonster2(Character,BossMonsterAction):
+    def attack(self,enemy):
+        enemy.hp = enemy.hp - self.power
+
+    def defense(self):
+        self.shield = self.shield + 20
+    
+    def skil(self,user):
+        print("Boss Unique Skills  Crucio ~~~ damage 40")
+        damage = 40
+        if user.shield > 0:
+            if damage > user.shield:
+                damage = damage - user.shield
+                user.shield = 0
+                user.hp = user.hp - damage
+        else:
+            user.hp = user.hp - damage
+
+class BossMonster3(Character,BossMonsterAction):
+    def attack(self,enemy):
+        enemy.hp = enemy.hp - self.power
+
+    def defense(self):
+        self.shield = self.shield + 20
+    
+    def skil(self,user):
+        print("Boss Unique Skills abadaKedabra ~~~ damage 100")
+        damage = 100
+        if user.shield > 0:
+            if damage > user.shield:
+                damage = damage - user.shield
+                user.shield = 0
+                user.hp = user.hp - damage
+        else:
+            user.hp = user.hp - damage
 
 
 
