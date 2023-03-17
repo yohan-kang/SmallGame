@@ -1,52 +1,26 @@
-from character import Character,Hunter,Monster,BossMonster1,BossMonster2,BossMonster3
-
-# def goToHell(enemy,user):
-
-#     print("보스 고유 스킬 go to hell ~~~ 데미지 20")
-#     damage = 40
-#     if user.shield > 0:
-#         if damage > user.shield:
-#             damage = damage - user.shield
-#             user.shield = 0
-#             user.hp = user.hp - damage
-#     else:
-#         user.hp = user.hp - damage
-
-# def Crucio(enemy,user):
-
-#     print("보스 고유 스킬 Crucio ~~~ 데미지 40")
-#     damage = 40
-#     if user.shield > 0:
-#         if damage > user.shield:
-#             damage = damage - user.shield
-#             user.shield = 0
-#             user.hp = user.hp - damage
-#     else:
-#         user.hp = user.hp - damage
-
-# def abadaKedabra(enemy,user):
-
-#     print("보스 고유 스킬 abadaKedabra ~~~ 데미지 100")
-#     damage = 100
-#     if user.shield > 0:
-#         if damage > user.shield:
-#             damage = damage - user.shield
-#             user.shield = 0
-#             user.hp = user.hp - damage
-#     else:
-#         user.hp = user.hp - damage
+from character import Soldier,Boss
 
 
+# stage1 = ['Slime','Wolf','skeletal soldier']
+# stage2 = ['Mutant','warrior','Assassin']
+# stage3 = ['Grim Reaper','Ruined King','headless horseman']
 
-easy = []
-soso = []
-hard = []
+soldier_list = []
+boss_list = [] 
 
+slime = Soldier('soldier','Slime',15,20,3,0,5)
+wolf = Soldier('soldier','wolf',20,20,5,10,5)
+skeletal_soldier = Soldier('soldier','skeletal_soldier',20,20,6,15,5)
+mutant = Soldier('soldier','mutant',30,20,8,10,5)
+warrior = Soldier('soldier','warrior',40,20,10,20,5)
+assassin = Soldier('soldier','assassin',25,20,15,10,5)
+grim_reaper = Soldier('soldier','grim_reaper',40,20,20,20,10)
+ruined_king = Soldier('soldier','ruined_king',50,20,25,20,10)
+headless_horseman = Soldier('soldier','headless_horseman',50,20,30,30,10)
 
+stage1_boss = Boss('boss',"King of Skeleton",50,50,10,30,20,'sword',"Go to hell" )
+stage2_boss = Boss('boss',"Minotaur",80,60,20,40,30,"axe","Smash")
+stage3_boss = Boss('boss',"Hades",100,60,20,40,20,"The magic wand of death","abadaKedabra")
 
-boss1 = BossMonster1('boss',"King of Skeleton",60,60,20,"sword",30)
-boss2 = BossMonster2('boss',"minotaur",60,60,20,"The Devil's Wand",30)
-boss3 = BossMonster3('boss',"Ruined King",60,60,20,"The magic wand of death",30)
-
-
-arr = [boss1,boss2,boss3]
+soldier_list = [slime,wolf,skeletal_soldier,mutant,warrior,assassin,grim_reaper,ruined_king,headless_horseman]
+boss_list = [stage1_boss,stage2_boss,stage3_boss]

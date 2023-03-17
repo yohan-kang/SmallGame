@@ -1,117 +1,104 @@
-from interface import BasicAction,HunterAction,BossMonsterAction
-
-
 class Character():
-    def __init__(self,grade,name,hp,mp,power,weapon:None,shield):
+    def __init__(self,grade:str,name:str,hp:int,mp:int,power:int,armor:int,shield:int,weapon:None,skill_name:None):
         self.grade = grade 
         self.name = name 
         self.hp = hp
         self.mp = mp
         self.power = power
-        self.weapon = weapon
+        self.armor = armor
         self.shield = shield
+        self.weapon = weapon
+        self.skill_name = skill_name
         # self.action_point = point
+
+    def attack(self,enemy):
+        if  enemy.armor > self.power:
+            enemy.armor = enemy.armor - self.power
+        elif self.power > enemy.armor:
+            damage = self.power - enemy.armor
+            enemy.armor = 0
+            enemy.hp = enemy.hp - damage 
+        elif enemy.armor == 0:
+            enemy.hp = enemy.hp - self.power
+
+    def defense(self):
+        self.armor = self.armor + self.shield
+        pass
+
 
     def __str__(self):
 	    # return "user1 님 HP:{} shield : {} point :{}".format(self.hp, self.shield, self.action_point)
         if self.hp > 1:
-            return "{} 님 HP:{} MP:{}  weapon:{} power:{} shield: {}".format(self.name,self.hp,self.mp,self.weapon,self.power,self.shield)
+            return "{} 님 HP:{} MP:{}  weapon:{} power:{} armor: {}".format(self.name,self.hp,self.mp,self.weapon,self.power,self.armor)
         else:
             return "YOU DIE"
 
 
 
+class Skill():
+    
+    def blow(self,enemy):
+        damage = self.power*2
+        print("Unique Skills {} ~~~  damage :{} ".format(self.skill_name,damage)) 
 
-class Hunter(Character,HunterAction):
-
-    def attack(self,enemy):
-        if  enemy.shield > self.power:
-            enemy.shield = enemy.shield - self.power
-        elif self.power > enemy.shield:
-            damage = self.power - enemy.shield
-            enemy.shield = 0
-            enemy.hp = enemy.hp - damage 
-        elif enemy.shield == 0:
-            enemy.hp = enemy.hp - self.power
-
-    def defense(self):
-        self.shield = self.shield + 10
-
-    def skil():
-        pass 
+        if enemy.armor > 0:
+            if damage > enemy.armor:
+                damage = damage - enemy.armor
+                enemy.armor = 0
+                enemy.hp = enemy.hp - damage
+        else:
+            enemy.hp = enemy.hp - damage
 
     def run():
         pass
 
-class Monster(Character,BasicAction):
-    def attack(self,user):
-        # enemy.hp = enemy.hp - (self.weapon + self.power)
-        user.hp = user.hp - self.power
 
-    def defense(self):
-        self.shield = self.shield + 10
+class Hunter(Character,Skill):
+    pass
+
+class Soldier(Character):
+    pass
+
+class Boss(Character,Skill):
+    pass
 
 
-class BossMonster1(Character,BossMonsterAction):
-    def attack(self,enemy):
-        if  enemy.shield > self.power:
-            enemy.shield = enemy.shield - self.power
-        elif self.power > enemy.shield:
-            damage = self.power - enemy.shield
-            enemy.shield = 0
-            enemy.hp = enemy.hp - damage 
-        elif enemy.shield == 0:
-            enemy.hp = enemy.hp - self.power
 
-    def defense(self):
-        self.shield = self.shield + 20
-    
-    def skil(self,user):
-        print("Boss Unique Skills  go to hell ~~~ damage 20")
-        damage = 20
-        if user.shield > 0:
-            if damage > user.shield:
-                damage = damage - user.shield
-                user.shield = 0
-                user.hp = user.hp - damage
-        else:
-            user.hp = user.hp - damage
+# class BossMonster1(Character,BossMonsterAction):
+#     def skill(self,user):
+#         print("Boss Unique Skills  go to hell ~~~ damage 20")
+#         damage = 20
+#         if user.armor > 0:
+#             if damage > user.armor:
+#                 damage = damage - user.armor
+#                 user.armor = 0
+#                 user.hp = user.hp - damage
+#         else:
+#             user.hp = user.hp - damage
 
-class BossMonster2(Character,BossMonsterAction):
-    def attack(self,enemy):
-        enemy.hp = enemy.hp - self.power
+# class BossMonster2(Character,BossMonsterAction):
+#     def skill(self,user):
+#         print("Boss Unique Skills  Crucio ~~~ damage 40")
+#         damage = 40
+#         if user.armor > 0:
+#             if damage > user.armor:
+#                 damage = damage - user.armor
+#                 user.armor = 0
+#                 user.hp = user.hp - damage
+#         else:
+#             user.hp = user.hp - damage
 
-    def defense(self):
-        self.shield = self.shield + 20
-    
-    def skil(self,user):
-        print("Boss Unique Skills  Crucio ~~~ damage 40")
-        damage = 40
-        if user.shield > 0:
-            if damage > user.shield:
-                damage = damage - user.shield
-                user.shield = 0
-                user.hp = user.hp - damage
-        else:
-            user.hp = user.hp - damage
-
-class BossMonster3(Character,BossMonsterAction):
-    def attack(self,enemy):
-        enemy.hp = enemy.hp - self.power
-
-    def defense(self):
-        self.shield = self.shield + 20
-    
-    def skil(self,user):
-        print("Boss Unique Skills abadaKedabra ~~~ damage 100")
-        damage = 100
-        if user.shield > 0:
-            if damage > user.shield:
-                damage = damage - user.shield
-                user.shield = 0
-                user.hp = user.hp - damage
-        else:
-            user.hp = user.hp - damage
+# class BossMonster3(Character,BossMonsterAction):
+#     def skill(self,user):
+#         print("Boss Unique Skills abadaKedabra ~~~ damage 100")
+#         damage = 100
+#         if user.armor > 0:
+#             if damage > user.armor:
+#                 damage = damage - user.armor
+#                 user.armor = 0
+#                 user.hp = user.hp - damage
+#         else:
+#             user.hp = user.hp - damage
 
 
 

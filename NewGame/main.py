@@ -21,17 +21,18 @@ def intro():
       print("Invalid input Please write a natural number 1 or 2.")
 
 
-def choiceLevel():
-  os.system("cls")
-  bool = True
-  while bool:
-    # os.system("cls")
-    num = input("choice level(1:Easy 2:soso 3:hard):")
-    if num.isdigit() and 0 < int(num) < 4:
-      bool = False
-    else :
-      print("Invalid input Please write a natural number 1 or 2 or 3")
-  return num
+# def choiceLevel():
+#   os.system("cls")
+#   bool = True
+#   while bool:
+#     # os.system("cls")
+#     num = input("choice level(1:Easy 2:soso 3:hard):")
+#     if num.isdigit() and 0 < int(num) < 4:
+#       bool = False
+#     else :
+#       print("Invalid input Please write a natural number 1 or 2 or 3")
+#   return num
+
 
 def choiceWeapon():
   os.system("cls")
@@ -76,7 +77,7 @@ def stage(user):
 
 
 
-def fight(stage,user,enemy):
+def fight(stage,user : Character,enemy : Character):
   # 여기에 전투 유저의 행동과 적의 랜던 행동을 반복해서 전투를 하려고 만들생각이다.  
   # 1 사용자의 액션
   # 2 적군의 액션 
@@ -182,23 +183,22 @@ def monsterAct(user,enemy):
 def randomNum(enemy):
 
   if enemy.grade == "soldier":
-    # 90% attack 20% defense
+    # 80% attack 20% defense
     x = random.randint(1,10)
-    if x % 2 == 0 or x % 3 == 0 or x == 1 :
+    if x <= 8:
       return 1
     else : 
-      # case 5,7 == 210 %
       return 2
 
 
   if enemy.grade == "boss":
     # 60% attack 30% skill 10% defense
     x = random.randint(1,10)
-    if x % 2 == 0 or x == 1:
+    if x <= 6:
       return 1
-    elif x == 3 or x == 5 or x == 7:
+    elif 7 <= x <= 9:
       return 3
-    elif x == 9:
+    elif x == 10:
       return 2 
 
 
@@ -207,11 +207,11 @@ def main():
   again = True
   # while again:
   intro()
-  level = choiceLevel()
+  # level = choiceLevel()
   weapon = choiceWeapon()
   name = createCharacter()
-  user = Hunter('warrior',name,50,15,10,weapon,10) 
-  # print(user)
+  user = Hunter('hunter',name,50,20,10,15,10,weapon,'blow') 
+     
   stage(user)
 
 main()
