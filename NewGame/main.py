@@ -2,7 +2,7 @@ import interface
 import os
 import random
 from character import Character, Hunter
-from monster import arr
+from monster import monster_list
 
 
 def intro():
@@ -61,31 +61,25 @@ def createCharacter():
   return str 
 
 
-def stage(user):
+def stage(user:Character):
   os.system("cls")
-  stage = 1
   user = user
-  i = 0
-  # boss = character.boss1
-  while stage != 3:
-    boss = arr[i]
-    bool = fight(stage,user,boss)
-    if bool:
-      stage += 1
-    i += 1
-# 여기에 스테이지 별로 난이도 설정을 할려고 한다 
+
+  while monster_list:
+    stage = 1
+    monster = monster_list.pop(0)
+    for obj in monster:
+      fight(stage,user,obj)
+      if user.hp < 0:
+        return 2
+    stage += 1
+  return 1 
 
 
-
-def fight(stage,user : Character,enemy : Character):
-  # 여기에 전투 유저의 행동과 적의 랜던 행동을 반복해서 전투를 하려고 만들생각이다.  
-  # 1 사용자의 액션
-  # 2 적군의 액션 
-  # 스테이지 이동 OR 끝 
-
+def fight(stage: int,user : Character,enemy : Character):
   bool = True 
 
-  while 0 < int(enemy.hp):
+  while (0 < int(user.hp)) or bool:
     os.system("cls")
     print("-------------------------------")
     print('------------STAGE'+str(stage)+'-------------')
@@ -94,18 +88,19 @@ def fight(stage,user : Character,enemy : Character):
     print("\n")
     print(enemy)
     print("\n")
-    
-    if 0 >= user.hp:
 
+    if 0 >= user.hp:
       print("=========Game Over========")
-      exit()
+      bool = False
     elif 0 > enemy.hp:
       print("Clear : next stage")
-      return bool
+      bool = False
+      return
     print("======= user Action =======")
     userAct(user,enemy)
     print("======= monster Action =======")
     monsterAct(user,enemy)
+
 
 
 def userAct(user,enemy):
@@ -115,9 +110,9 @@ def userAct(user,enemy):
     if num.isdigit():
       if int(num) == 1:
         if enemy.shield > 0 :
-          print( " {} attacks the enemy with {} power.  enemy hp :{} enemy Shield :{} -> ".format(user.name,user.power,enemy.hp,enemy.shield))
+          print( " {} attacks the enemy with {} power.  enemy hp :{} enemy armor :{} -> ".format(user.name,user.power,enemy.hp,enemy.armor))
           user.attack(enemy)
-          print( "enemy hp: {} enemy Shield: {} decrease".format(enemy.hp,enemy.shield))
+          print( "enemy hp: {} enemy armor: {} decrease".format(enemy.hp,enemy.armor))
           bool = False
         else : 
           print( " {} attacks the enemy with {} power.  enemy hp: {} -> ".format(user.name,user.power,enemy.hp))
@@ -127,11 +122,13 @@ def userAct(user,enemy):
       elif int(num) == 2: 
         print( " {} has a defensive posture.  Shield {} -> ".format(user.name,user.shield))
         user.defense()
-        print( "Shield: {} Increase" .format(user.shield))
+        print( "armor: {} Increase" .format(user.armor))
         bool = False
       elif int(num) == 3: 
         user.run()
         bool = False
+      elif str(num).upper == "EXIT": 
+        exit()
       else:
         print("Invalid input Please write a natural number 1 or 2 or 3")
     else :
@@ -143,9 +140,9 @@ def monsterAct(user,enemy):
   act_num = randomNum(enemy)
   if act_num == 1:
     if user.shield > 0 :
-      print( " {} attacks the user with {} power.  user hp :{} user Shield :{} -> ".format(enemy.name,enemy.power,user.hp,user.shield))
+      print( " {} attacks the user with {} power.  user hp :{} user armor :{} -> ".format(enemy.name,enemy.power,user.hp,user.armor))
       enemy.attack(user)
-      print( "user hp: {} user Shield: {} decrease".format(user.hp,user.shield))
+      print( "user hp: {} user armor: {} decrease".format(user.hp,user.armor))
       bool = False
     else : 
       print( " {} attacks the user with {} power.  user hp {} -> ".format(enemy.name,enemy.power,user.hp))
@@ -157,7 +154,7 @@ def monsterAct(user,enemy):
   elif act_num == 2:
     print( " {} has a defensive posture.  Shield {} ->".format(enemy.name,enemy.shield))
     enemy.defense()
-    print( "Shield: {} Increase" .format(enemy.shield))
+    print( "armor: {} Increase" .format(enemy.armor))
 
   elif act_num == 3:
     print( " Boss: {} used skill to {}".format(enemy.name,user.name))
@@ -212,6 +209,10 @@ def main():
   name = createCharacter()
   user = Hunter('hunter',name,50,20,10,15,10,weapon,'blow') 
      
-  stage(user)
-
+  result = stage(user)
+  if result == 2:
+    print("Game Over")
+  elif result == 1:
+    print("Clear Game")
+  print("Good Bye")
 main()
